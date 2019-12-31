@@ -8,6 +8,13 @@ running_dictionary = {'1': '', '2': '', '3': '',
                       '7': '', '8': '', '9': ''}
 
 
+def reset_dictionary():
+    global running_dictionary
+    running_dictionary = {'1': '', '2': '', '3': '',
+                          '4': '', '5': '', '6': '',
+                          '7': '', '8': '', '9': ''}
+
+
 def update_dictionary(player_letter, position):
     """Update running dictionary"""
 
@@ -117,9 +124,10 @@ def player_input(player):
 
 
 def play():
-    """play tic toc toe game"""
+    """play tic toc toe single round"""
 
     board(running_dictionary)
+    # possible winner on next try is not feasible before each player makes their respective first two moves.
     for i in range(2):
         player_input(1)
         player_input(2)
@@ -151,9 +159,33 @@ def play():
             break
 
 
+def game():
+    """keep playing at user's request"""
+
+    player_1_marker, player_2_marker = chose_marker()
+    keep_playing = True
+
+    while keep_playing:
+        reset_dictionary()
+        play()
+        play_on = input("Play again? (Y/[N]): ") or 'N'
+
+        if play_on.upper() == 'Y':
+            change_markers = input("Change markers? (Y/[N]): ") or 'N'
+
+            if change_markers.upper() == 'Y':
+                global player_1_marker, player_2_marker
+                player_1_marker, player_2_marker = chose_marker()
+                clear_screen()
+                continue
+
+            else:
+                continue
+
+        else:
+            break
+
+
 # run script
 clear_screen()
-
-player_1_marker, player_2_marker = chose_marker()
-
-play()
+game()
