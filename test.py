@@ -50,7 +50,7 @@ def chose_marker():
     return player_1_choice.upper(), player_2_default_choice.pop()
 
 
-def dictionary_empty_spots(dictionary):
+def dictionary_empty_slots(dictionary):
     """Return a key:value pair dictionary where dictionary value is an empty"""
 
     return {key: value for key, value in dictionary.items() if value == ''}
@@ -84,7 +84,7 @@ def check_winner():
 def validate_input(player, player_marker):
     """Check validity of input"""
 
-    empty_spots = dictionary_empty_spots(running_dictionary)
+    empty_spots = dictionary_empty_slots(running_dictionary)
     user_input = 'dummy string place holder'
 
     while not user_input.isdigit() or user_input not in empty_spots:
@@ -162,7 +162,6 @@ def play():
 def game():
     """keep playing at user's request"""
 
-    player_1_marker, player_2_marker = chose_marker()
     keep_playing = True
 
     while keep_playing:
@@ -188,4 +187,5 @@ def game():
 
 # run script
 clear_screen()
+player_1_marker, player_2_marker = chose_marker()
 game()
